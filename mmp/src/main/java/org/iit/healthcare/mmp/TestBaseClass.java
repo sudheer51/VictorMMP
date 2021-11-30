@@ -15,7 +15,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class TestBaseClass {
 	
 	protected WebDriver driver;
-	protected Properties pro;
+	public Properties pro;
 	@BeforeClass
 	public void instantiateDriver() throws IOException
 	{
