@@ -11,7 +11,7 @@ public class PatientSendMessagesTests extends TestBaseClass{
 
 		@Test
 		public void validateScheduleAppointment()
-		{
+		{      
 			 
 			
 			HelperClass helper = new HelperClass(driver);
