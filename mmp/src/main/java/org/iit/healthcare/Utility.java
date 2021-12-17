@@ -106,6 +106,59 @@ public class Utility {
 	}
 	
 	
+	/*
+	 * Added getRandomZip to generate a random valid 5 digit zip 
+	 */
+	public static int getRandomZip() {
+
+		Random r = new Random();
+		int zip = r.nextInt(100);
+
+		if (zip == 0) 
+		{
+			zip = zip + 1;
+		}
+
+		if (zip < 10)
+		{
+			zip = zip * 10000;
+		}
+		else
+		{
+			zip = zip * 1000;
+		}
+		return zip;
+	}	
+	
+	/*
+	 * Added getRandomInvalidZip() to Generate a random invalid (short or long) zip
+	 */ 
+	public static int getRandomInvalidZip(String size)
+	{
+		Random r = new Random();
+		int zip = 0;
+		
+		if(size.contains("short"))
+		{
+			zip = r.nextInt(10);
+			if(zip == 0)
+			{
+				 zip = zip + 1;
+			}
+			zip = zip * 100;
+		}
+		
+		if(size.contains("long"))
+		{
+			zip = r.nextInt(100);
+			if(zip == 0)
+			{
+				 zip = zip + 1;
+			}
+			zip =  zip * 100000;
+		}
+		return zip;
+	}
 	
 	
 	
