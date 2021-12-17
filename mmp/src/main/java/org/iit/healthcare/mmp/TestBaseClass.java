@@ -35,5 +35,16 @@ public class TestBaseClass {
 		pro.load(fis);
 		return pro;
 	}
+	
+	/*
+	 * Added quitDriver()
+	 */
+	@AfterClass
+	public void quitDriver() throws InterruptedException 
+	{
+		System.out.println("+++ In quitDriver +++");
+		Thread.sleep(1000);
+		driver.close();
+	}
 
 }
