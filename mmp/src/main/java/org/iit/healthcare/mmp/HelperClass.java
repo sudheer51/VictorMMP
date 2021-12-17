@@ -45,6 +45,45 @@ public class HelperClass {
 		driver.findElement(By.xpath("//span[contains(text(),'"+moduleName+"')]")).click();
 
 	}
+	
+	/* 
+	 * Added patientLogin() 
+	 * @Param username
+	 * @Param passowrd
+	 * returns page header text
+	 */
+	public String patientLogin(String username, String password)
+	{
+		System.out.println("+++ In login() +++");
+		driver.findElement(By.xpath("//input[@id='username']")).sendKeys(username);
+		driver.findElement(By.xpath("//input[@id='password']")).sendKeys(password);
+		driver.findElement(By.xpath("//input[@value='Sign In']")).click();
+		WebElement name = driver.findElement(By.xpath("//h3[contains(text(), 'ria1')]"));
+		return name.getText();
+	}
+	
+	/*
+	 * Added navigateToPage()
+	 * @Param tabName
+	 * returns page title
+	 */
+	public String navigateToPage(String tabName)
+	{
+		System.out.println("+++ In navigateToPage with: " +tabName +"+++");
+		driver.findElement(By.xpath("//span[normalize-space()='"+tabName+"']")).click();
+		String title = driver.getTitle();
+		return title;		
+	}
+	
+	/*
+	 * Added pageRefresh()
+	 */
+	public void pageRefresh()
+	{
+		System.out.println("+++ In pageRefresh() +++");
+		driver.navigate().refresh();
+	}
+	
 	public void captureScreenshot(String tc_Name) throws IOException
 	{
 		System.out.println("Inside Capturing Screenshot method");
