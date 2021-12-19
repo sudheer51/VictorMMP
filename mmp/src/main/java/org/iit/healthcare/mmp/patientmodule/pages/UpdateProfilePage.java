@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 
 /*
- * Tester: VICTOR
+ * Tester: Team VICTOR
  * Date Created: 12/10/2021
  * Added action methods to update patient Profile Zip code and Age.
  * Verified By: Sudheer
