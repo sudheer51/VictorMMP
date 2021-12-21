@@ -22,25 +22,28 @@ public class UpdateProfilePage {
 		
 		WebDriver driver;
 		
-		public UpdateProfilePage(WebDriver dr)
+		public UpdateProfilePage(WebDriver driver)
 		{
-			this.driver = dr;
+			this.driver = driver;
 		}
 
 		
 		//*****************************************************************************
 		//******                  UPDATE PROFILE PAGE Actions             *************
 		//*****************************************************************************
+		
+		//Click on Edit Button
 		public void clickEditButton()
 		{
 			System.out.println("+++ In Profile tab clickEditButton +++");
-			driver.findElement(By.xpath("//input[@id='Ebtn']")).click();
+			driver.findElement(By.id("Ebtn")).click();
 		}
 		
+		//Click on the Profile Save Button
 		public String clickProfileSaveButton()
 		{
 			System.out.println("+++ In Profile tab clickProfileSaveButton +++");
-			driver.findElement(By.xpath("//input[@id='Sbtn']")).click();
+			driver.findElement(By.id("Sbtn")).click();
 			Alert alert= driver.switchTo().alert();
 			String alertMsg = alert.getText();
 			System.out.println("Alert msg is: " +alertMsg);
@@ -48,22 +51,26 @@ public class UpdateProfilePage {
 			return alertMsg;		
 		}
 		
+		/*
+		 * Fetch the values in all the Profile tab fields
+		 * Returns a hashMap of all the Profile fields and values
+		 */
 		public HashMap<String, String> getProfileDetails()
 		{
 			System.out.println("+++ In Profile tab getProfileDetails() +++");
 			HashMap <String, String> profileDetails = new HashMap<String, String>();
+			
+			profileDetails.put("First Name", driver.findElement(By.name("firstname")).getAttribute("value"));
+			profileDetails.put("Last Name", driver.findElement(By.id("lname")).getAttribute("value"));
+			profileDetails.put("License", driver.findElement(By.id("licn")).getAttribute("value"));
+			profileDetails.put("SSN", driver.findElement(By.id("ssn")).getAttribute("value"));
+			profileDetails.put("Address", driver.findElement(By.id("addr")).getAttribute("value"));
+			profileDetails.put("Age", driver.findElement(By.id("age")).getAttribute("value"));
+			profileDetails.put("Weight", driver.findElement(By.id("weight")).getAttribute("value"));
+			profileDetails.put("City", driver.findElement(By.id("city")).getAttribute("value"));
+			profileDetails.put("State", driver.findElement(By.id("state")).getAttribute("value"));
+			profileDetails.put("Zip", driver.findElement(By.id("zip")).getAttribute("value"));
 
-			profileDetails.put("First Name", driver.findElement(By.xpath("//input[@name='firstname']")).getAttribute("value"));
-			profileDetails.put("Last Name", driver.findElement(By.xpath("//input[@id='lname']")).getAttribute("value"));
-			profileDetails.put("License", driver.findElement(By.xpath("//input[@id='licn']")).getAttribute("value"));
-			profileDetails.put("SSN", driver.findElement(By.xpath("//input[@id='ssn']")).getAttribute("value"));
-			profileDetails.put("Address", driver.findElement(By.xpath("//input[@id='addr']")).getAttribute("value"));
-			profileDetails.put("Age", driver.findElement(By.xpath("//input[@id='age']")).getAttribute("value"));
-			profileDetails.put("Weight", driver.findElement(By.xpath("//input[@id='weight']")).getAttribute("value"));
-			profileDetails.put("City", driver.findElement(By.xpath("//input[@id='city']")).getAttribute("value"));
-			profileDetails.put("State", driver.findElement(By.xpath("//input[@id='state']")).getAttribute("value"));
-			profileDetails.put("Zip", driver.findElement(By.xpath("//input[@id='zip']")).getAttribute("value"));
-					
 			return profileDetails;
 			
 		}
@@ -74,27 +81,36 @@ public class UpdateProfilePage {
 		//******                  UPDATE PROFILE ZIP Actions              *************
 		//*****************************************************************************
 		
+		/*
+		 * Enter a valid zip code in the Profile tab
+		 * @return: a valid random zip
+		 */
 		public int editProfileZip() throws InterruptedException
 		{
 			int randZip = Utility.getRandomZip();
 			
 			System.out.println("+++ In Profile tab editProfileZip() +++");
-			driver.findElement(By.xpath("//input[@id='zip']")).clear();
+			driver.findElement(By.id("zip")).clear();
 			Thread.sleep(2000);
-			driver.findElement(By.xpath("//input[@id='zip']")).sendKeys(""+randZip+"");  
+			driver.findElement(By.id("zip")).sendKeys(""+randZip+"");
 			System.out.println("Changing the zip to: "  +randZip);
 			return randZip;
 		}
 		
-		public void editProfileDeleteZip() throws InterruptedException
+		//Clear the value in the Zip field
+		public void editProfileDeleteZip()
 		{
 			
 			System.out.println("+++ In Profile tab editProfileDeleteZip() +++");
-			driver.findElement(By.xpath("//input[@id='zip']")).clear();
-			Thread.sleep(2000);	
+			driver.findElement(By.id("zip")).clear();
 		}
 		
 		
+		/*
+		 * Enter an invalid zip code in the Profile zip field
+		 * @param: str- short/long/alpha
+		 * Generate a random short/long/alphabetical zip code
+		 */
 		public void editProfileInvalidZip(String str) throws InterruptedException
 		{
 			System.out.println("++++ In Profile tab editProfileInvalidZip() ++++");
@@ -103,34 +119,38 @@ public class UpdateProfilePage {
 			{
 				int invalidZip = Utility.getRandomInvalidZip(str);
 				System.out.println("Invalid  short zip to be entered: " + invalidZip);
-				driver.findElement(By.xpath("//input[@id='zip']")).clear();
+				driver.findElement(By.id("zip")).clear();
 				Thread.sleep(2000);
-				driver.findElement(By.xpath("//input[@id='zip']")).sendKeys("" + invalidZip + "");
+				driver.findElement(By.id("zip")).sendKeys(""+invalidZip+"");
 			}
 			if(str.contains("long"))
 			{
 				int invalidZip = Utility.getRandomInvalidZip(str);
 				System.out.println("Invalid long zip to be entered: " + invalidZip);
-				driver.findElement(By.xpath("//input[@id='zip']")).clear();
+				driver.findElement(By.id("zip")).clear();
 				Thread.sleep(2000);
-				driver.findElement(By.xpath("//input[@id='zip']")).sendKeys("" + invalidZip + "");
+				driver.findElement(By.id("zip")).sendKeys(""+invalidZip+"");
 			}
 			if(str.contains("alpha"))
 			{
 				String invalidZip = Utility.getRandomString(8);
 				System.out.println("Invalid alpha zip to be entered: " + invalidZip);
-				driver.findElement(By.xpath("//input[@id='zip']")).clear();
+				driver.findElement(By.id("zip")).clear();
 				Thread.sleep(2000);
-				driver.findElement(By.xpath("//input[@id='zip']")).sendKeys("" + invalidZip + "");
+				driver.findElement(By.id("zip")).sendKeys(""+invalidZip+"");
 			}
 			
 		}
 		
+		/*
+		 * Click Save Button after entering invalid zip and read the error message
+		 * @return: text of the error message
+		 */
 		public String editProfileInvalidZipSaveBtn()
 		{
 			System.out.println("+++ In Profile tab  editProfileInvalidZipSaveBtn()+++");
-			driver.findElement(By.xpath("//input[@id='Sbtn']")).click();
-			String msg = driver.findElement(By.xpath("//p[@id='ziperr']")).getText();
+			driver.findElement(By.id("Sbtn")).click();
+			String msg = driver.findElement(By.id("ziperr")).getText();
 			return msg;
 		}
 		
@@ -139,48 +159,54 @@ public class UpdateProfilePage {
 		//******                  UPDATE PROFILE AGE Actions              *************
 		//*****************************************************************************
 		
+		/*
+		 * Edit the Profile tab Age field with a valid number
+		 * @return: random age between 0 and 100.
+		 */
 		public int editProfileValidAge() throws InterruptedException{
 		
 			System.out.println("+++ In editProfileValidAge +++");
 			int randAge = Utility.getRandomNumber(101);
 			
-			driver.findElement(By.xpath("//input[@id='age']")).clear();
+			driver.findElement(By.id("age")).clear();
 			Thread.sleep(2000);
 			System.out.println("Changing Age to: " +randAge);
-			driver.findElement(By.xpath("//input[@id='age']")).sendKeys(""+randAge+"");
+			driver.findElement(By.id("age")).sendKeys(""+randAge+"");
 			return randAge;		
 		}
 		
+		/*
+		 * Enter an invalid age in the Profile tab Age field
+		 * @param: age - 101
+		 */
 		public void editProfileInvalidAge(int age) throws InterruptedException
 		{
 			System.out.println("+++ In editProfileInValidAge +++");
-			driver.findElement(By.xpath("//input[@id='age']")).clear();
+			driver.findElement(By.id("age")).clear();
 			Thread.sleep(2000);
 			System.out.println("Changing Age to: " +age);
-			driver.findElement(By.xpath("//input[@id='age']")).sendKeys(""+age+"");		
+			driver.findElement(By.id("age")).sendKeys(""+age+"");
 		}
 		
+		/*
+		 * Click Save Button after entering invalid Age in the Profile tab Age field
+		 * @return: text of the error message
+		 */
 		public String editProfileInvalidAgeSaveBtn()
 		{
 			System.out.println("+++ In Profile tab  editProfileInvalidAgeSaveBtn()+++");
-			driver.findElement(By.xpath("//input[@id='Sbtn']")).click();
-			String msg = driver.findElement(By.xpath("//p[@id='ageerr1']")).getText();
+			driver.findElement(By.id("Sbtn")).click();
+			String msg = driver.findElement(By.id("ageerr1")).getText();
 			return msg;		
 		}
 		
-		public String editProfileBlankAgeSaveBtn()
-		{
-			System.out.println("+++ In Profile tab  editProfileBlankAgeSaveBtn()+++");
-			driver.findElement(By.xpath("//input[@id='Sbtn']")).click();
-			String msg = driver.findElement(By.xpath("//p[@id='ageerr']")).getText();
-			return msg;
-			
-		}
-		
+		/*
+		 * Clear the Profile tab Age field
+		 */
 		public void editProfileDeleteAge() throws InterruptedException
 		{
 			System.out.println("+++ In Profile tab editProfileDeleteAge() +++");
-			driver.findElement(By.xpath("//input[@id='age']")).clear();
+			driver.findElement(By.id("age")).clear();
 			Thread.sleep(2000);	
 		}
 	}

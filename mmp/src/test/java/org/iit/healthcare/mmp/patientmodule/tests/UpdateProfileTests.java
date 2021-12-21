@@ -21,7 +21,6 @@ public class UpdateProfileTests extends TestBaseClass {
 	HashMap<String, String> profileDetails = new HashMap<String, String>();
 	HashMap<String, String> editedProfileDetails = new HashMap<String, String>();
 	SoftAssert sa = new SoftAssert();
-	//HelperClass helper = new HelperClass(driver);
 	
 	@Test (priority = 1)
 	public void editProfileValidZip() throws InterruptedException

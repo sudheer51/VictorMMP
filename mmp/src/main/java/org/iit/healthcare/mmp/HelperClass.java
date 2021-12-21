@@ -48,9 +48,9 @@ public class HelperClass {
 	
 	/* 
 	 * Added patientLogin() 
-	 * @Param username
-	 * @Param passowrd
-	 * returns page header text
+	 * @param: username
+	 * @param: password
+	 * @return: page header text
 	 */
 	public String patientLogin(String username, String password)
 	{
@@ -63,9 +63,9 @@ public class HelperClass {
 	}
 	
 	/*
-	 * Added navigateToPage()
-	 * @Param tabName
-	 * returns page title
+	 * Added navigateToPage() to navigate to a specific tab
+	 * @param: tabName
+	 * @return: page title
 	 */
 	public String navigateToPage(String tabName)
 	{

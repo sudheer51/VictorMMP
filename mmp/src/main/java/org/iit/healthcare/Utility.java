@@ -108,6 +108,7 @@ public class Utility {
 	
 	/*
 	 * Added getRandomZip to generate a random valid 5 digit zip 
+	 * @return: a valid 5-digit zip between 10000 and 99000
 	 */
 	public static int getRandomZip() {
 
@@ -132,6 +133,8 @@ public class Utility {
 	
 	/*
 	 * Added getRandomInvalidZip() to Generate a random invalid (short or long) zip
+	 * @param:size - "short" or "long"  
+	 * @return: a 3-digit or a 7-digit zip
 	 */ 
 	public static int getRandomInvalidZip(String size)
 	{
