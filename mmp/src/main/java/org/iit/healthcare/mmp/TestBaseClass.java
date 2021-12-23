@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -23,6 +24,7 @@ public class TestBaseClass {
 		pro = loadProperties();
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 	public Properties loadProperties() throws IOException
@@ -34,6 +36,17 @@ public class TestBaseClass {
 		FileInputStream fis = new FileInputStream(src);
 		pro.load(fis);
 		return pro;
+	}
+	
+	/*
+	 * Added quitDriver()
+	 */
+	@AfterClass
+	public void quitDriver() throws InterruptedException 
+	{
+		System.out.println("+++ In quitDriver +++");
+		Thread.sleep(1000);
+		driver.close();
 	}
 
 }
